@@ -8,6 +8,7 @@ import 'package:valper_app/screens/records_screen.dart'; // Ensure this path is 
 import 'package:valper_app/screens/parking_screen.dart'; // Ensure this path is correct
 import 'package:valper_app/screens/support_screen.dart'; // Ensure this path is correct
 import 'package:valper_app/screens/profile_screen.dart'; // Import ProfileScreen for the Drawer
+import 'package:valper_app/screens/about_app_screen.dart'; // <--- NEW: Import your AboutAppScreen
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -187,7 +188,11 @@ class _HomeScreenState extends State<HomeScreen> {
           const SizedBox(height: 16),
           ElevatedButton.icon(
             onPressed: () {
-              // TODO: Add About App action
+              // Navigate to the AboutAppScreen
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const AboutAppScreen()),
+              );
             },
             icon: Image.asset(
               'assets/information.png',

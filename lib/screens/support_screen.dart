@@ -16,7 +16,7 @@ class _SupportScreenState extends State<SupportScreen> {
 
   // List of suggested questions
   final List<String> _suggestedQuestions = [
-    'How to register a vehicle?',
+    
     'Where is the parking slot?',
     'Who are the creators of this app?',
     'What are the app features?',
