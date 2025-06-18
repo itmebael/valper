@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'widgets/bottom_nav_bar.dart';
-import 'register_steps_screen.dart';
+import 'package:valper_app/widgets/bottom_nav_bar.dart'; // Ensure this path is correct
+import 'package:valper_app/register_steps_screen.dart'; // Ensure this path is correct
 
 // Import screens from separate files
-import 'screens/records_screen.dart';
-import 'screens/parking_screen.dart';
-import 'screens/support_screen.dart';
+import 'package:valper_app/screens/records_screen.dart'; // Ensure this path is correct
+import 'package:valper_app/screens/parking_screen.dart'; // Ensure this path is correct
+import 'package:valper_app/screens/support_screen.dart'; // Ensure this path is correct
+import 'package:valper_app/screens/profile_screen.dart'; // Import ProfileScreen for the Drawer
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -22,15 +23,41 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
+    // Only add the main content pages to the _pages list for the bottom navigation
     _pages.add(_buildHomeContent());
     _pages.add(const RecordsScreen());
     _pages.add(const ParkingScreen());
     _pages.add(const SupportScreen());
+    // ProfileScreen is NOT added here as it will be in the Drawer
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: const Color(0xFF004A8F),
+        title: Text(
+          'VALPER', // App title
+          style: GoogleFonts.poppins(
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
+        ),
+        centerTitle: true,
+        leading: Builder(
+          builder: (context) {
+            return IconButton(
+              icon: const Icon(Icons.person, color: Colors.white), // Profile icon
+              onPressed: () {
+                Scaffold.of(context).openDrawer(); // Opens the drawer
+              },
+            );
+          },
+        ),
+      ),
+      drawer: const Drawer(
+        child: ProfileScreen(), // The ProfileScreen content will be inside the Drawer
+      ),
       bottomNavigationBar: BottomNavBar(
         currentIndex: _currentIndex,
         onTap: (index) {
