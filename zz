@@ -1,0 +1,100 @@
+import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'splash_screen.dart';
+import 'home_screen.dart';
+import 'login_screen.dart'; // Add this
+import 'register_screen.dart'; // Add this if you have one
+
+void main() {
+  runApp(const ValperApp());
+}
+
+class ValperApp extends StatelessWidget {
+  const ValperApp({super.key});
+
+  Future<Widget> _getInitialScreen() async {
+    final prefs = await SharedPreferences.getInstance();
+    final isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
+    return isLoggedIn ? const HomeScreen() : const SplashScreen();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'VALPER',
+      theme: ThemeData(primarySwatch: Colors.blue),
+      debugShowCheckedModeBanner: false,
+      routes: {
+        '/login': (context) => const LoginScreen(),
+        '/home': (context) => const HomeScreen(),
+        '/register': (context) => const RegisterScreen(), // Optional
+      },
+      home: FutureBuilder(
+        future: _getInitialScreen(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Scaffold(body: Center(child: CircularProgressIndicator()));
+          } else {
+            return snapshot.data as Widget;
+          }
+        },
+      ),
+    );
+  }
+}
+
+
+
+
+
+import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'splash_screen.dart';
+import 'home_screen.dart';
+import 'login_screen.dart';
+import 'register_screen.dart';
+
+void main() {
+  runApp(const ValperApp());
+}
+
+class ValperApp extends StatelessWidget {
+  const ValperApp({super.key});
+
+  // You can keep this for later use or remove since we skip it now
+  Future<Widget> _getInitialScreen() async {
+    final prefs = await SharedPreferences.getInstance();
+    final isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
+    return isLoggedIn ? const HomeScreen() : const SplashScreen();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'VALPER',
+      theme: ThemeData(primarySwatch: Colors.blue),
+      debugShowCheckedModeBanner: false,
+      routes: {
+        '/login': (context) => const LoginScreen(),
+        '/home': (context) => const HomeScreen(),
+        '/register': (context) => const RegisterScreen(),
+      },
+      // Jump directly to HomeScreen, skipping async check:
+      home: const HomeScreen(),
+      
+      // If you want to restore the logic, replace above line with:
+      /*
+      home: FutureBuilder(
+        future: _getInitialScreen(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Scaffold(body: Center(child: CircularProgressIndicator()));
+          } else {
+            return snapshot.data as Widget;
+          }
+        },
+      ),
+      */
+    );
+  }
+}
