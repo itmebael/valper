@@ -62,7 +62,7 @@ class AboutAppScreen extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             Text(
-              'VALPER (Vehicle Access and Location for Parking and Enrollment Records) is a comprehensive mobile application designed to streamline vehicle management and parking services within a university campus environment. It aims to provide a seamless experience for both students and faculty in registering their vehicles, locating available parking slots, and managing their parking records.',
+              'VALPER ( A VEHICLE AI-BASED LICENSE PLATE AND DRIVER RECOGNITION SYSTEM FOR PARKING ACCESS MANAGEMENT AT SAMAR STATE UNIVERSITY) is a comprehensive mobile application designed to streamline vehicle management and parking services within a university campus environment. It aims to provide a seamless experience for both students and faculty in registering their vehicles, locating available parking slots, and managing their parking records.',
               style: GoogleFonts.poppins(fontSize: 16, height: 1.5),
               textAlign: TextAlign.justify,
             ),
@@ -99,7 +99,7 @@ class AboutAppScreen extends StatelessWidget {
             const SizedBox(height: 30),
             Center(
               child: Text(
-                'Developed by [Your Team/Company Name]', // Replace with your info
+                'Developed by Valper', 
                 style: GoogleFonts.poppins(
                   fontSize: 14,
                   color: Colors.grey[700],
