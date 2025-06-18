@@ -27,24 +27,29 @@ class _LoginScreenState extends State<LoginScreen> {
     }
 
     try {
+      // Get user info by username
       final response = await Supabase.instance.client
           .from('profiles')
-          .select('id, username')
+          .select('id, username, email')
           .eq('username', username)
           .single();
 
       final userId = response['id'];
+      final email = response['email'];
 
+      // Use actual email to log in
       final authResponse = await Supabase.instance.client.auth.signInWithPassword(
-        email: response['username'] + '@example.com', // optional placeholder email
+        email: email,
         password: password,
       );
 
+      // Save session data
       final prefs = await SharedPreferences.getInstance();
       await prefs.setBool('isLoggedIn', true);
       await prefs.setString('username', response['username']);
       await prefs.setString('userId', userId);
 
+      // Navigate to HomeScreen
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (_) => const HomeScreen()),
